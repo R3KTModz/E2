@@ -1,0 +1,222 @@
+@name Skin Changer ~ By R3KTModz
+@persist R G B Rainbow Mat Gun
+runOnChat(1)
+
+#[--------------
+    Prefix
+--------------]#
+Prefix="!"
+#[---------------
+    first
+---------------]#
+
+Ver="[V1.6]"
+Me = owner()
+E = entity()
+setName("Skin Changer ~ By R3KTModz "+Ver)
+if(first()){
+    hint("MADE BY : R3KTModz",10000)
+    #############
+    printColor(vec(125,125,125),"----------------------------------------------------------------------------------------")
+    printColor((hsv2rgb((curtime()*200)%360,1,1)),"R3KTModz Skin Changer | "+Ver)
+    printColor((hsv2rgb((curtime()*200)%360,1,1)),"MADE BY : R3KTModz")
+    printColor((hsv2rgb((curtime()*200)%360,1,1)),"Suggestions : https://discord.gg/9PmacN2")
+    printColor((hsv2rgb((curtime()*200)%360,1,1)),"Change Logs : https://discord.gg/9PmacN2")
+    printColor((hsv2rgb((curtime()*200)%360,1,1)),"Youtube Link : https://www.youtube.com/channel/UCwvfBFe5wgBFTYemD8VPF6Q")
+    printColor((hsv2rgb((curtime()*200)%360,1,1)),"Commands type "+Prefix+"help")
+    printColor((hsv2rgb((curtime()*200)%360,1,1)),"Check For Updates At : https://discord.gg/9PmacN2")
+    printColor(vec(125,125,125),"----------------------------------------------------------------------------------------")
+    #############
+    Me:soundPlay(1,3,"garrysmod/balloon_pop_cute.wav")
+    R=255
+    G=255
+    B=255
+}
+#[-----------------------------
+            Help
+-----------------------------]#
+runOnChat(1)
+if(chatClk(Me))
+    {
+        if(Me:lastSaid():lower()==Prefix+"help"){
+        hideChat(1)
+        printColor(vec(125,125,125),"////////////////////////////")
+        printColor((hsv2rgb((curtime()*100)%360,1,1)),"                     Help 1/2")
+        printColor(vec(125,125,125),"////////////////////////////")        
+        printColor((hsv2rgb((curtime()*200)%360,1,1)),Prefix+"wire")
+        printColor((hsv2rgb((curtime()*200)%360,1,1)),Prefix+"debug")
+        printColor((hsv2rgb((curtime()*200)%360,1,1)),Prefix+"redline")
+        printColor((hsv2rgb((curtime()*200)%360,1,1)),Prefix+"danger")
+        printColor((hsv2rgb((curtime()*200)%360,1,1)),Prefix+"space")
+        printColor((hsv2rgb((curtime()*200)%360,1,1)),Prefix+"normal | to reset.")
+        printColor((hsv2rgb((curtime()*200)%360,1,1)),"Type !help 2 for next page.")
+        printColor(vec(125,125,125),"////////////////////////////")
+    }
+}
+
+if(chatClk(Me))
+    {
+        if(Me:lastSaid():lower()==Prefix+"help 2"){
+        hideChat(1)
+        printColor(vec(125,125,125),"////////////////////////////")
+        printColor((hsv2rgb((curtime()*100)%360,1,1)),"                     Help 2/2")
+        printColor(vec(125,125,125),"////////////////////////////")
+        printColor((hsv2rgb((curtime()*200)%360,1,1)),Prefix+"rgb | ex: !rgb 255 0 0 \"For red\" the rgb stands for red green blue.")
+        printColor((hsv2rgb((curtime()*200)%360,1,1)),Prefix+"rainbow")
+        printColor((hsv2rgb((curtime()*200)%360,1,1)),Prefix+"gun | Type \"!gun 1\" to turn gun changer on but 0 for off.")
+        printColor(vec(125,125,125),"////////////////////////////")
+    }
+}
+#[-----------------------------
+            Gun Check
+-----------------------------]#
+if(chatClk(Me)){
+    local L=owner():lastSaid():lower():explode(" ")
+    if(L[1,string]==Prefix+"gun"){
+        hideChat(1)
+        Gun=L[2,string]:toNumber()
+        if(L[2,string]==""){Gun=0}
+        if(Gun>1){Gun=1}
+        if(Gun>0){GunV="On"}
+        else{GunV="Off"}
+        printColor((hsv2rgb((curtime()*200)%360,1,1)),"Gun changer is now "+GunV+".")
+    }
+}
+if(Gun==0){
+    owner():weapon():setMaterial("normalplz")
+    owner():weapon():setColor(255,255,255)
+}
+#[-----------------------------
+            Color
+-----------------------------]#
+if(chatClk(Me)){
+    local L=owner():lastSaid():lower():explode(" ")
+    if(L[1,string]==Prefix+"rgb"){
+        hideChat(1)
+        R=L[2,string]:toNumber()
+        if(L[2,string]==""){R=255}
+        G=L[3,string]:toNumber()
+        if(L[3,string]==""){G=255}
+        B=L[4,string]:toNumber()
+        if(L[4,string]==""){B=255}
+        if(Rainbow==1){
+            printColor((hsv2rgb((curtime()*200)%360,1,1)),"Rainbow is now off! Because you activated",vec(R,G,B)," RGB",(hsv2rgb((curtime()*200)%360,1,1))," selection.")
+            Rainbow=0
+        }
+        printColor(vec(125,125,125),"----------------------------------------------------------------------------------------")
+        printColor(vec(R,0,0),"Red Value = "+R)
+        printColor(vec(0,G,0),"Green Value = "+G)
+        printColor(vec(0,0,B),"Blue Value = "+B)
+        printColor(vec(125,125,125),"----------------------------------------------------------------------------------------")
+        Me:setColor(vec(R,G,B))
+        if(Gun==1){Me:weapon():setColor(vec(R,G,B))}
+    }
+}
+#[-----------------------------
+        Materials
+-----------------------------]#
+if(chatClk(Me)){
+    local Material="models/wireframe"
+    if(Me:lastSaid():lower()==Prefix+"wire"){
+        Me:setMaterial(Material)
+        if(Gun==1){Me:weapon():setMaterial(Material)}
+        printColor(vec(R,G,B),"Material Set to: "+Material)
+        hideChat(1)
+        Mat=1
+    }
+}
+
+if(chatClk(Me)){
+    local Material="models/debug/debugwhite"
+    if(Me:lastSaid():lower()==Prefix+"debug"){
+        Me:setMaterial(Material)
+        if(Gun==1){Me:weapon():setMaterial(Material)}
+        printColor(vec(R,G,B),"Material Set to: "+Material)
+        hideChat(1)
+        Mat=1
+    }
+}
+
+if(chatClk(Me)){
+    local Material="models/XQM/LightLinesRed_tool"
+    if(Me:lastSaid():lower()==Prefix+"redline"){
+        Me:setMaterial(Material)
+        if(Gun==1){Me:weapon():setMaterial(Material)}
+        printColor(vec(R,G,B),"Material Set to: "+Material)
+        hideChat(1)
+        Mat=1
+    }
+}
+
+if(chatClk(Me)){
+    local Material="phoenix_storms/stripes"
+    if(Me:lastSaid():lower()==Prefix+"danger"){
+        Me:setMaterial(Material)
+        if(Gun==1){Me:weapon():setMaterial(Material)}
+        printColor(vec(R,G,B),"Material Set to: "+Material)
+        hideChat(1)
+        Mat=1
+    }
+}
+
+if(chatClk(Me)){
+    local Material="models/props_lab/warp_sheet"
+    if(Me:lastSaid():lower()==Prefix+"space"){
+        Me:setMaterial(Material)
+        if(Gun==1){Me:weapon():setMaterial(Material)}
+        printColor(vec(R,G,B),"Material Set to: "+Material)
+        hideChat(1)
+        Mat=1
+    }
+}
+
+if(chatClk(owner())){
+local Material=owner():getMaterial()
+if (Me:lastSaid() == Prefix+"normal") {
+    owner():setMaterial("normalplz")
+    owner():weapon():setMaterial("normalplz")
+    owner():setColor(255,255,255)
+    owner():weapon():setColor(255,255,255)
+    Rainbow=0
+    hideChat(1)
+    if(Rainbow){
+        Rainbow=0
+    }
+    printColor((hsv2rgb((curtime()*200)%360,1,1)),"You are now normal.")
+}
+}
+
+
+#[-----------------------------
+            Rainbow
+-----------------------------]#
+if(chatClk(Me)){
+    if(Me:lastSaid():lower()==Prefix+"rainbow"){
+        Rainbow=1
+        printColor((hsv2rgb((curtime()*200)%360,1,1)),"Rainbow is now on!")
+        hideChat(1)
+    }
+}
+
+if(Rainbow){
+    runOnTick(1)
+    Me:setColor(hsv2rgb((curtime()*200)%360,1,1))   
+    if(Gun==1){Me:weapon():setColor(hsv2rgb((curtime()*200)%360,1,1))}
+}
+else{
+runOnTick(0)
+}
+#[-----------------------------
+            Last
+-----------------------------]#
+runOnLast(1)
+if(last()){
+owner():setMaterial("normalplz")
+owner():setColor(255,255,255)
+owner():weapon():setColor(255,255,255)
+owner():weapon():setMaterial("normalplz")
+printColor(vec(125,125,125),"----------------------------------------------------------------------------------------")
+printColor((hsv2rgb((curtime()*200)%360,1,1)),"Check For Updates At : https://discord.gg/9PmacN2")
+printColor(vec(125,125,125),"----------------------------------------------------------------------------------------")
+Me:soundPlay(1,3,"garrysmod/balloon_pop_cute.wav")
+}
